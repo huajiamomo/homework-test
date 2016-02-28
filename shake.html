@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{padding: 0;margin: 0;}
+	@-webkit-keyframes shake {
+		20%{-webkit-transform:rotate(30deg);}
+		40%{-webkit-transform:rotate(0deg);}
+		60%{-webkit-transform:rotate(-30deg);}
+		80%{-webkit-transform:rotate(10deg);}
+		100%{-webkit-transform:rotate(0deg);}
+	}
+	div{width: 200px; height: 200px; background: red; margin:150px auto; color: #fff; text-align:center; line-height: 200px; font-size: 24px;}
+	.shake{-webkit-animation:1s shake ease 3;}
+	</style>
+	<script type="text/javascript">
+	window.onload=function(){
+		var oDiv=document.querySelector(div);
+		var lastX=0;
+		var lastY=0;
+		var lastZ=0;
+		if(window.DeviceMotionEvent)
+		{
+			window.addEventListener('devicemotion',function(ev){
+				var oEvent=ev || event;
+				var acc=oEvent.accelerationIncludingGravity;
+				var x=acc.x;
+				var y=acc.y;
+				var z=acc.z;
+
+				if( Math.abs(x-lastX)>20 || Math.abs(y-lastY)>20 || Math.abs(z-lastZ)>20)
+				{
+					oDiv.classList.add(shake);
+					oDiv.innerHTML='摇动了';
+				}
+
+				oDiv.addEventListener('animationend',function(){
+					oDiv.classList.remove(shake);
+				},false)
+
+				lastX=x;
+				lastY=y;
+				lastZ=z;
+			},false)
+		}
+		else
+		{
+			alert('您的手机不支持重力感应');
+		}
+	};
+	</script>
+</head>
+<body>
+	<div></div>
+</body>
+</html>
