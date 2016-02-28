@@ -17,7 +17,7 @@
 	</style>
 	<script type="text/javascript">
 	window.onload=function(){
-		var oDiv=document.querySelector(div);
+		var oDiv=document.querySelector('div');
 		var lastX=0;
 		var lastY=0;
 		var lastZ=0;
@@ -32,12 +32,12 @@
 
 				if( Math.abs(x-lastX)>20 || Math.abs(y-lastY)>20 || Math.abs(z-lastZ)>20)
 				{
-					oDiv.classList.add(shake);
+					oDiv.classList.add('shake');
 					oDiv.innerHTML='摇动了';
 				}
 
-				oDiv.addEventListener('animationend',function(){
-					oDiv.classList.remove(shake);
+				oDiv.addEventListener('webkitAnimationEnd',function(){
+					oDiv.classList.remove('shake');
 				},false)
 
 				lastX=x;
